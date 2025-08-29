@@ -1,71 +1,48 @@
 import pandas as pd
-import json
 import os
+import json
 
 
-sihData = pd.read_excel("./resources/sihProblemStatements.xlsx")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+excel_path = os.path.join(script_dir, 'resources', 'sihProblemStatements.xlsx')
 
+sihData = pd.read_excel(excel_path)
+sihData['DepartmentOrg'] = sihData['Department'] + ' - ' + sihData['Organisation']
 
-# Create JsonData directory if it doesn't exist
-json_dir = "./JsonData"
-os.makedirs(json_dir, exist_ok=True)
-
-
-#  unique Organizations
-organizations = sihData['Organisation'].dropna().unique().tolist()
-organizations_data = {
-    "organizations": [{"id": i+1, "name": org} for i, org in enumerate(sorted(organizations))]
+all_data = {
+    'titles': sihData['Title'].tolist(),
+    'tech_buckets': sihData['Technology_Bucket'].tolist(),
+    'descriptions': sihData['Description'].tolist(),
+    'statement_ids': sihData['Statement_id'].tolist(),
+    'categories': sihData['Category'].tolist(),
+    'department_orgs': sihData['DepartmentOrg'].tolist()
 }
-with open(f"{json_dir}/organizations.json", 'w', encoding='utf-8') as f:
-    json.dump(organizations_data, f, indent=2, ensure_ascii=False)
 
 
-#  unique Departments
-departments = sihData['Department'].dropna().unique().tolist()
-departments_data = {
-    "departments": [{"id": i+1, "name": dept} for i, dept in enumerate(sorted(departments))]
-}
-with open(f"{json_dir}/departments.json", 'w', encoding='utf-8') as f:
-    json.dump(departments_data, f, indent=2, ensure_ascii=False)
+resources_dir = os.path.join(script_dir, 'resources/JsonData')
+os.makedirs(resources_dir, exist_ok=True)
+
+for key, data in all_data.items():
+    filename = f'{key}.json'
+    data = pd.Series(data).unique().tolist()
+    with open(os.path.join(resources_dir, filename), 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
 
 
-#  unique Categories (Themes)
-categories = sihData['Category'].dropna().unique().tolist()
-categories_data = {
-    "categories": [{"id": i+1, "name": cat} for i, cat in enumerate(sorted(categories))]
-}
-with open(f"{json_dir}/categories.json", 'w', encoding='utf-8') as f:
-    json.dump(categories_data, f, indent=2, ensure_ascii=False)
-
-
-#  unique Technology Buckets
-tech_buckets = sihData['Technology_Bucket'].dropna().unique().tolist()
-tech_buckets_data = {
-    "technology_buckets": [{"id": i+1, "name": tech} for i, tech in enumerate(sorted(tech_buckets))]
-}
-with open(f"{json_dir}/technology_buckets.json", 'w', encoding='utf-8') as f:
-    json.dump(tech_buckets_data, f, indent=2, ensure_ascii=False)
-
-
-# Extract Problem Statements
 problem_statements = []
 for index, row in sihData.iterrows():
-    problem = {
-        "id": row['Statement_id'],
-        "title": row['Title'],
-        "category": row['Category'],
-        "technology_bucket": row['Technology_Bucket'],
-        "description": row['Description'],
-        "department": row['Department'],
-        "organisation": row['Organisation']
-    }
-    problem_statements.append(problem)
+    problem_statements.append({
+        "Statement_id": row['Statement_id'],
+        "Title": row['Title'],
+        "Category": row['Category'],
+        "Technology_Bucket": row['Technology_Bucket'],
+        "Description": row['Description'],
+        "DepartmentOrg": row['DepartmentOrg']
+    })
 
-problem_statements_data = {
-    "problem_statements": problem_statements
-}
-with open(f"{json_dir}/problem_statements.json", 'w', encoding='utf-8') as f:
-    json.dump(problem_statements_data, f, indent=2, ensure_ascii=False)
+# Save combined data
+with open(os.path.join(resources_dir, 'problem_statements.json'), 'w', encoding='utf-8') as f:
+    json.dump(problem_statements, f, indent=2)
 
-
+print(f"All JSON files have been created in: {resources_dir}")
 
