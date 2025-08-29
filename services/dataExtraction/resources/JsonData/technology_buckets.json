@@ -1,0 +1,76 @@
+{
+  "technology_buckets": [
+    {
+      "id": 1,
+      "name": "Agriculture, FoodTech & Rural Development"
+    },
+    {
+      "id": 2,
+      "name": "Blockchain & Cybersecurity"
+    },
+    {
+      "id": 3,
+      "name": "Clean & Green Technology"
+    },
+    {
+      "id": 4,
+      "name": "Disaster Management"
+    },
+    {
+      "id": 5,
+      "name": "Fitness & Sports"
+    },
+    {
+      "id": 6,
+      "name": "Heritage & Culture"
+    },
+    {
+      "id": 7,
+      "name": "MedTech / BioTech / HealthTech"
+    },
+    {
+      "id": 8,
+      "name": "Miscellaneous"
+    },
+    {
+      "id": 9,
+      "name": "Renewable / Sustainable Energy"
+    },
+    {
+      "id": 10,
+      "name": "Robotics and Drones"
+    },
+    {
+      "id": 11,
+      "name": "Smart Automation"
+    },
+    {
+      "id": 12,
+      "name": "Smart Education"
+    },
+    {
+      "id": 13,
+      "name": "Smart Resource Conservation"
+    },
+    {
+      "id": 14,
+      "name": "Smart Vehicles"
+    },
+    {
+      "id": 15,
+      "name": "Space Technology"
+    },
+    {
+      "id": 16,
+      "name": "Toys & Games"
+    },
+    {
+      "id": 17,
+      "name": "Transportation & Logistics"
+    },
+    {
+      "id": 18,
+      "name": "Travel & Tourism"
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "organizations": [
+    {
+      "id": 1,
+      "name": "AICTE"
+    },
+    {
+      "id": 2,
+      "name": "AICTE, MIC-Student Innovation"
+    },
+    {
+      "id": 3,
+      "name": "Autodesk"
+    },
+    {
+      "id": 4,
+      "name": "Bharat Electronics Limited (BEL)"
+    },
+    {
+      "id": 5,
+      "name": "Department of Science and Technology"
+    },
+    {
+      "id": 6,
+      "name": "GAIL, Ministry of Petroleum and Natural Gas"
+    },
+    {
+      "id": 7,
+      "name": "Godrej Appliances"
+    },
+    {
+      "id": 8,
+      "name": "Government of Gujarat"
+    },
+    {
+      "id": 9,
+      "name": "Government of Himachal Pardesh"
+    },
+    {
+      "id": 10,
+      "name": "Government of NCT of Delhi"
+    },
+    {
+      "id": 11,
+      "name": "Government of Punjab"
+    },
+    {
+      "id": 12,
+      "name": "Government of Rajasthan"
+    },
+    {
+      "id": 13,
+      "name": "Indian Space Research Organization (ISRO)"
+    },
+    {
+      "id": 14,
+      "name": "Indo-Tibetan Border Police (ITBP), MHA"
+    },
+    {
+      "id": 15,
+      "name": "MathWorks India Private Limited"
+    },
+    {
+      "id": 16,
+      "name": "Ministry of AYUSH"
+    },
+    {
+      "id": 17,
+      "name": "Ministry of Agriculture and Farmers Welfare"
+    },
+    {
+      "id": 18,
+      "name": "Ministry of Coal"
+    },
+    {
+      "id": 19,
+      "name": "Ministry of Communication"
+    },
+    {
+      "id": 20,
+      "name": "Ministry of Consumer Affairs, Food and Public Distribution"
+    },
+    {
+      "id": 21,
+      "name": "Ministry of Culture"
+    },
+    {
+      "id": 22,
+      "name": "Ministry of Defence"
+    },
+    {
+      "id": 23,
+      "name": "Ministry of Earth Sciences"
+    },
+    {
+      "id": 24,
+      "name": "Ministry of Education"
+    },
+    {
+      "id": 25,
+      "name": "Ministry of Electronics and Information Technology"
+    },
+    {
+      "id": 26,
+      "name": "Ministry of Fisheries, Animal Husbandry and Dairying"
+    },
+    {
+      "id": 27,
+      "name": "Ministry of Housing and Urban Affairs"
+    },
+    {
+      "id": 28,
+      "name": "Ministry of Information and Broadcasting"
+    },
+    {
+      "id": 29,
+      "name": "Ministry of Jal Shakti"
+    },
+    {
+      "id": 30,
+      "name": "Ministry of Law & Justice"
+    },
+    {
+      "id": 31,
+      "name": "Ministry of Panchayati Raj"
+    },
+    {
+      "id": 32,
+      "name": "Ministry of Power"
+    },
+    {
+      "id": 33,
+      "name": "Ministry of Railway"
+    },
+    {
+      "id": 34,
+      "name": "Ministry of Skill Development and Entrepreneurship (MSDE)"
+    },
+    {
+      "id": 35,
+      "name": "Ministry of Social Justice and Empowerment"
+    },
+    {
+      "id": 36,
+      "name": "Ministry of Youth Affairs & Sports"
+    },
+    {
+      "id": 37,
+      "name": "Narcotics Control Bureau (NCB)"
+    },
+    {
+      "id": 38,
+      "name": "National Aluminium Company Limited (NALCO)"
+    },
+    {
+      "id": 39,
+      "name": "National Critical Information Infrastructure Protection Center (NCIIPC)"
+    },
+    {
+      "id": 40,
+      "name": "National Investigation Agency (NIA)"
+    },
+    {
+      "id": 41,
+      "name": "National Security Guard (NSG), MHA"
+    },
+    {
+      "id": 42,
+      "name": "National Technical Research Organisation (NTRO)"
+    },
+    {
+      "id": 43,
+      "name": "The National Disaster Response Force (NDRF), MHA"
+    }
+  ]
+}

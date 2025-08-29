@@ -1,0 +1,264 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "name": "AICTE"
+    },
+    {
+      "id": 2,
+      "name": "Ali Yavar Jung National Institute of Speech and Hearing Disabilities(Divyangjan), (AYJNISHD (D)"
+    },
+    {
+      "id": 3,
+      "name": "All India Institute of Ayurveda (AIIA)"
+    },
+    {
+      "id": 4,
+      "name": "Anti-Cyber Terrorism Division, NATIONAL INVESTIGATION AGENCY (NIA)"
+    },
+    {
+      "id": 5,
+      "name": "Autodesk"
+    },
+    {
+      "id": 6,
+      "name": "Bureau of Water Use Efficiency, National Water Mission"
+    },
+    {
+      "id": 7,
+      "name": "Center for Electronic Governance"
+    },
+    {
+      "id": 8,
+      "name": "Central Ground Water Board"
+    },
+    {
+      "id": 9,
+      "name": "Central Mine Planning & Design Institute Limited"
+    },
+    {
+      "id": 10,
+      "name": "Command Area Development & Water Management (CADWM) Wing, DoWR, RD&GR, Ministry of Jal Shakti"
+    },
+    {
+      "id": 11,
+      "name": "Cyber Law and Data Governance Division"
+    },
+    {
+      "id": 12,
+      "name": "DGRE, DRDO"
+    },
+    {
+      "id": 13,
+      "name": "Delhi Metro Rail Corporation Ltd (DMRC Ltd)"
+    },
+    {
+      "id": 14,
+      "name": "Delhi State Load Despatch Centre/Delhi Transco Limited (DTL)"
+    },
+    {
+      "id": 15,
+      "name": "Department of Animal Husbandry and Dairying"
+    },
+    {
+      "id": 16,
+      "name": "Department of Consumer Affairs"
+    },
+    {
+      "id": 17,
+      "name": "Department of Drinking Water and Sanitation (Coordination Section)"
+    },
+    {
+      "id": 18,
+      "name": "Department of Information Technology"
+    },
+    {
+      "id": 19,
+      "name": "Department of Justice"
+    },
+    {
+      "id": 20,
+      "name": "Department of Posts"
+    },
+    {
+      "id": 21,
+      "name": "Department of Science and Technology"
+    },
+    {
+      "id": 22,
+      "name": "Department of Water Resources & Ganga Rejuvenation/Central Water commission"
+    },
+    {
+      "id": 23,
+      "name": "Department of Water Resources & Ganga Rejuvenation/Central water commission"
+    },
+    {
+      "id": 24,
+      "name": "Dept. of Medical Science- S & P Unit, National Institute for Empowerment of Persons with Multiple Disabilities (D) (NIEPMD), Dept. of Empowerment of Persons with Disabilities"
+    },
+    {
+      "id": 25,
+      "name": "Education Department"
+    },
+    {
+      "id": 26,
+      "name": "Eduction Department"
+    },
+    {
+      "id": 27,
+      "name": "GAIL Limited"
+    },
+    {
+      "id": 28,
+      "name": "Godrej Appliances"
+    },
+    {
+      "id": 29,
+      "name": "Health and Family Welfare Department"
+    },
+    {
+      "id": 30,
+      "name": "Indian Council of Agricultural Research (ICAR)"
+    },
+    {
+      "id": 31,
+      "name": "Indian National Center for Ocean Information Services (INCOIS)"
+    },
+    {
+      "id": 32,
+      "name": "Indian Space Research Organization (ISRO)"
+    },
+    {
+      "id": 33,
+      "name": "Indo-Tibetan Border Police (ITBP)"
+    },
+    {
+      "id": 34,
+      "name": "MathWorks India Private Limited"
+    },
+    {
+      "id": 35,
+      "name": "Ministry of Information and Broadcasting"
+    },
+    {
+      "id": 36,
+      "name": "Ministry of Panchayati Raj"
+    },
+    {
+      "id": 37,
+      "name": "Ministry of Power"
+    },
+    {
+      "id": 38,
+      "name": "Ministry of Railway"
+    },
+    {
+      "id": 39,
+      "name": "NDRF"
+    },
+    {
+      "id": 40,
+      "name": "Narcotics Control Bureau (NCB)"
+    },
+    {
+      "id": 41,
+      "name": "National Anti-Doping Agency (NADA),Coordination Section (SP-CDN) Department of Sports"
+    },
+    {
+      "id": 42,
+      "name": "National Council for Vocational Education and Training (NCVET)"
+    },
+    {
+      "id": 43,
+      "name": "National Council of Science Museums"
+    },
+    {
+      "id": 44,
+      "name": "National Critical Information Infrastructure Protection Center (NCIIPC)"
+    },
+    {
+      "id": 45,
+      "name": "National Informatics Centre"
+    },
+    {
+      "id": 46,
+      "name": "National Institute for the Empowerment of Persons with Intellectual Disabilities (NIEPID)"
+    },
+    {
+      "id": 47,
+      "name": "National Mission for Clean Ganga, DoWR, RD & GR"
+    },
+    {
+      "id": 48,
+      "name": "National Security Guard"
+    },
+    {
+      "id": 49,
+      "name": "National Technical Research Organisation (NTRO)"
+    },
+    {
+      "id": 50,
+      "name": "Punjab Skill Development Mission (PSDM)"
+    },
+    {
+      "id": 51,
+      "name": "RAC, DRDO"
+    },
+    {
+      "id": 52,
+      "name": "Regulation Bureau"
+    },
+    {
+      "id": 53,
+      "name": "SAG, DRDO"
+    },
+    {
+      "id": 54,
+      "name": "SBU-BEL"
+    },
+    {
+      "id": 55,
+      "name": "SSPL, DRDO"
+    },
+    {
+      "id": 56,
+      "name": "Samagra Shiksha Abhiyan, Department of School Education & Literacy (DoSEL)"
+    },
+    {
+      "id": 57,
+      "name": "Scholarship and Grant Bureau (SAG)"
+    },
+    {
+      "id": 58,
+      "name": "Smart Cities Mission"
+    },
+    {
+      "id": 59,
+      "name": "Smelter Plant, National Aluminium Company Ltd."
+    },
+    {
+      "id": 60,
+      "name": "Statistics Division, Department of Social Justice and Empowerment"
+    },
+    {
+      "id": 61,
+      "name": "Technical Education Department"
+    },
+    {
+      "id": 62,
+      "name": "Unique Identification Authority of India"
+    },
+    {
+      "id": 63,
+      "name": "University School of Information, Communication and Technology (USICT), Guru Gobind Singh Indraprastha University(GGSIPU), Government of NCT of Delhi"
+    },
+    {
+      "id": 64,
+      "name": "University of Agricultural Sciences, Dharwad (UASD), The Indian Council of Agricultural Research"
+    },
+    {
+      "id": 65,
+      "name": " Indian Sign Language Research and Training Centre (ISLRTC),Department of Empowerment of Persons with Disabilities (DePWD)"
+    }
+  ]
+}
