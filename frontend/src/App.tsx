@@ -44,11 +44,11 @@ function App() {
     const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
     const [clickedNode, setClickedNode] = useState<GraphNode | null>(null);
     const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
-    // ForceGraph component instance reference with type casting
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const graphRef = useRef<any>(null);
     
-    // Track window size for responsive layout
+  
     const [dimensions, setDimensions] = useState({
         width: window.innerWidth,
         height: window.innerHeight
@@ -91,7 +91,7 @@ function App() {
     }, [hoveredNode, clickedNode]);
 
     const filteredData = useMemo(() => {
-        // Filter problem statement nodes based on selected filters
+   
         const filteredProblemNodes = problemStatementsData
             .filter(u =>
                 (!selectedCategory || selectedCategory === "all" || u.Category === selectedCategory) &&
@@ -143,7 +143,7 @@ function App() {
         return { nodes: allNodes, links: techBucketLinks };
     }, [selectedCategory, selectedDepartment]);
 
-    // Custom force engine configuration
+
     const forceUpdate = useCallback(() => {
         if (graphRef.current) {
             const fg = graphRef.current;
@@ -167,13 +167,19 @@ function App() {
         forceUpdate();
     }, [filteredData, forceUpdate]);
 
-    // Generate consistent colors with better palette
+    // Generate consistent colors with Catppuccin Mocha palette
     const stringToColor = (str: string, nodeType?: string) => {
         if (nodeType === 'techBucket') {
-            // Special colors for tech buckets - more vibrant
+            // Catppuccin Mocha colors for tech buckets - more vibrant
             const techColors = [
-                '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', 
-                '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F'
+                '#f38ba8', // red
+                '#fab387', // peach
+                '#f9e2af', // yellow
+                '#a6e3a1', // green
+                '#94e2d5', // teal
+                '#89dceb', // sky
+                '#74c7ec', // sapphire
+                '#b4befe'  // lavender
             ];
             let hash = 0;
             for (let i = 0; i < str.length; i++) {
@@ -182,10 +188,16 @@ function App() {
             return techColors[Math.abs(hash) % techColors.length];
         }
         
-        // Softer colors for problem nodes
+        // Softer Catppuccin Mocha colors for problem nodes
         const colors = [
-            '#B8E6B8', '#FFE4B5', '#E6E6FA', '#F0E68C',
-            '#DDA0DD', '#98D8C8', '#F7DC6F', '#FFB6C1'
+            '#cba6f7', // mauve
+            '#f5c2e7', // pink
+            '#eba0ac', // maroon
+            '#f2cdcd', // flamingo
+            '#b4befe', // lavender 
+            '#89dceb', // sky
+            '#94e2d5', // teal
+            '#a6e3a1'  // green
         ];
         let hash = 0;
         for (let i = 0; i < str.length; i++) {
@@ -195,19 +207,19 @@ function App() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-ctp-text flex flex-col p-4">
+        <div className="min-h-screen bg-gradient-to-br from-ctp-base to-ctp-crust text-ctp-text flex flex-col p-4">
             <div className="flex flex-row space-x-4 mb-4 z-10">
                 {/* Category filter */}
                 <Select onValueChange={setSelectedCategory}>
-                    <SelectTrigger className="w-[180px] bg-gray-800/80 backdrop-blur border border-gray-700 text-gray-100">
+                    <SelectTrigger className="w-[180px] bg-ctp-mantle/80 backdrop-blur border border-ctp-surface0 text-ctp-text">
                         <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
-                    <SelectContent className="bg-gray-900 text-gray-100 border border-gray-700">
-                        <SelectItem value="all" className="hover:bg-gray-800">
+                    <SelectContent className="bg-ctp-base text-ctp-text border border-ctp-surface0">
+                        <SelectItem value="all" className="hover:bg-ctp-surface0">
                             All Categories
                         </SelectItem>
                         {categoriesData.map((category, index) => (
-                            <SelectItem key={index} value={category} className="hover:bg-gray-800">
+                            <SelectItem key={index} value={category} className="hover:bg-ctp-surface0">
                                 {category}
                             </SelectItem>
                         ))}
@@ -216,15 +228,15 @@ function App() {
 
                 {/* Department filter */}
                 <Select onValueChange={setSelectedDepartment}>
-                    <SelectTrigger className="w-[180px] bg-gray-800/80 backdrop-blur border border-gray-700 text-gray-100">
+                    <SelectTrigger className="w-[180px] bg-ctp-mantle/80 backdrop-blur border border-ctp-surface0 text-ctp-text">
                         <SelectValue placeholder="Select Organization" />
                     </SelectTrigger>
-                    <SelectContent className="bg-gray-900 text-gray-100 border border-gray-700">
-                        <SelectItem value="all" className="hover:bg-gray-800">
+                    <SelectContent className="bg-ctp-base text-ctp-text border border-ctp-surface0">
+                        <SelectItem value="all" className="hover:bg-ctp-surface0">
                             All Organizations
                         </SelectItem>
                         {departmentOrgsData.map((org, index) => (
-                            <SelectItem key={index} value={org} className="hover:bg-gray-800">
+                            <SelectItem key={index} value={org} className="hover:bg-ctp-surface0">
                                 {org}
                             </SelectItem>
                         ))}
@@ -249,12 +261,12 @@ function App() {
                     minZoom={0.1}
                     maxZoom={10}
                     backgroundColor="transparent"
-                    linkColor={() => 'rgba(100, 150, 200, 0.2)'}
+                    linkColor={() => 'rgba(116, 199, 236, 0.2)'} // ctp-sapphire with transparency
                     linkWidth={2}
                     linkDirectionalParticles={2}
                     linkDirectionalParticleWidth={2}
                     linkDirectionalParticleSpeed={0.003}
-                    linkDirectionalParticleColor={() => 'rgba(100, 200, 255, 0.8)'}
+                    linkDirectionalParticleColor={() => 'rgba(137, 220, 235, 0.8)'} // ctp-sky with transparency
                     cooldownTicks={100}
                     warmupTicks={100}
                     nodeCanvasObject={(node, ctx, globalScale) => {
@@ -269,7 +281,7 @@ function App() {
                             // Draw hexagon for tech bucket with glow effect
                             const nodeSize = Math.sqrt(typedNode.val || 20) * 2;
                             
-                            // Glow effect
+                            // Glow effect - using Catppuccin colors
                             ctx.shadowBlur = 20;
                             ctx.shadowColor = stringToColor(typedNode.techBucket, 'techBucket');
                             
@@ -285,7 +297,7 @@ function App() {
                             }
                             ctx.closePath();
                             
-                            // Gradient fill
+                            // Gradient fill with Catppuccin colors
                             const gradient = ctx.createRadialGradient(x, y, 0, x, y, nodeSize);
                             const baseColor = stringToColor(typedNode.techBucket, 'techBucket');
                             gradient.addColorStop(0, baseColor);
@@ -293,7 +305,7 @@ function App() {
                             ctx.fillStyle = gradient;
                             ctx.fill();
                             
-                            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                            ctx.strokeStyle = 'rgba(205, 214, 244, 0.8)'; // ctp-text color with transparency
                             ctx.lineWidth = 2;
                             ctx.stroke();
                             
@@ -301,7 +313,7 @@ function App() {
                             ctx.shadowBlur = 0;
                             
                             // Label for tech buckets
-                            ctx.fillStyle = 'white';
+                            ctx.fillStyle = '#cdd6f4'; // ctp-text color
                             ctx.font = `bold ${10 / globalScale}px sans-serif`;
                             ctx.fillText(typedNode.name, x, y);
                             
@@ -316,7 +328,7 @@ function App() {
                             ctx.beginPath();
                             ctx.arc(x, y, nodeSize, 0, 2 * Math.PI);
                             
-                            // Gradient fill
+                            // Gradient fill with Catppuccin-inspired colors
                             const gradient = ctx.createRadialGradient(x, y, 0, x, y, nodeSize);
                             const baseColor = stringToColor(typedNode.category);
                             gradient.addColorStop(0, baseColor);
@@ -325,7 +337,7 @@ function App() {
                             ctx.fillStyle = gradient;
                             ctx.fill();
                             
-                            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                            ctx.strokeStyle = 'rgba(205, 214, 244, 0.5)'; // ctp-text color with transparency
                             ctx.lineWidth = 1;
                             ctx.stroke();
                             
@@ -345,6 +357,9 @@ function App() {
                     onNodeClick={(node: GraphNode) => {
                         if (node && node.nodeType === 'problem') {
                             setClickedNode(node);
+                        }
+                        if( node && node.nodeType === 'problem'&& clickedNode && clickedNode.id === node.id) {
+                            setClickedNode(null);
                         }
                     }}
                     onEngineStop={() => forceUpdate()}
