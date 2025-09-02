@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/select"
 
 import { ProblemStatementCard } from "@/components/ProblemStatementCard"
+import { ProblemStatementSidebar } from "@/components/ProblemStatementSidebar"
+import { MyShortlists } from "@/components/MyShortlists"
 
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import React from 'react';
@@ -44,6 +46,7 @@ function App() {
     const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
     const [clickedNode, setClickedNode] = useState<GraphNode | null>(null);
     const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const graphRef = useRef<any>(null);
@@ -54,7 +57,7 @@ function App() {
         height: window.innerHeight
     });
 
-    // Update dimensions when the window is resized
+    // Update dimensions when the window is resized or sidebar state changes
     useEffect(() => {
         function handleResize() {
             setDimensions({
@@ -63,11 +66,13 @@ function App() {
             });
         }
         
+        // Initial call and event listener
+        handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [isSidebarOpen]); // Re-run when sidebar opens/closes
     
-    // Handle clicks outside of nodes to clear the clicked node
+    // Handle clicks outside of nodes to clear the clicked node and close sidebar
     useEffect(() => {
         function handleBackgroundClick(event: MouseEvent) {
             if (
@@ -76,6 +81,7 @@ function App() {
                 !hoveredNode
             ) {
                 setClickedNode(null);
+                setIsSidebarOpen(false);
             }
         }
         
@@ -83,12 +89,16 @@ function App() {
         return () => window.removeEventListener('click', handleBackgroundClick);
     }, [clickedNode, hoveredNode]);
     
-    // Clear clicked node when hovering away from it
+    // No longer clear clicked node when hovering away - let the sidebar stay open
+    // We'll keep this commented for reference
+    /*
     useEffect(() => {
         if (hoveredNode === null && clickedNode !== null) {
             setClickedNode(null);
+            setIsSidebarOpen(false);
         }
     }, [hoveredNode, clickedNode]);
+    */
 
     const filteredData = useMemo(() => {
    
@@ -254,7 +264,7 @@ function App() {
                     ref={graphRef}
                     graphData={filteredData}
                     nodeVal={node => node.val || 1}
-                    width={dimensions.width - 32}
+                    width={dimensions.width - (isSidebarOpen ? 480 : 32)} // Adjust width based on sidebar
                     height={dimensions.height - 100}
                     enableZoomInteraction={true}
                     enablePanInteraction={true}
@@ -357,21 +367,41 @@ function App() {
                     onNodeClick={(node: GraphNode) => {
                         if (node && node.nodeType === 'problem') {
                             setClickedNode(node);
+                            // Open the sidebar when a problem node is clicked
+                            setIsSidebarOpen(true);
                         }
-                        if( node && node.nodeType === 'problem'&& clickedNode && clickedNode.id === node.id) {
+                        if (node && node.nodeType === 'problem' && clickedNode && clickedNode.id === node.id) {
                             setClickedNode(null);
+                            setIsSidebarOpen(false);
                         }
                     }}
                     onEngineStop={() => forceUpdate()}
                 />
                 
-                {hoveredNode && hoveredNode.nodeType === 'problem' && (
+                {/* Show the hover card only when hovering over a problem node that isn't clicked */}
+                {hoveredNode && hoveredNode.nodeType === 'problem' && 
+                  (!clickedNode || clickedNode.id !== hoveredNode.id) && (
                     <ProblemStatementCard 
                         data={problemStatementsData.find(ps => ps.Statement_id === hoveredNode.id) || problemStatementsData[0]}
                         position={{ x: tooltipPos.x, y: tooltipPos.y }}
-                        expanded={!!clickedNode && clickedNode.id === hoveredNode.id}
+                        expanded={false}
                     />
                 )}
+                
+                {/* Sidebar for detailed problem statement information */}
+                {clickedNode && clickedNode.nodeType === 'problem' && (
+                    <ProblemStatementSidebar
+                        data={problemStatementsData.find(ps => ps.Statement_id === clickedNode.id) || null}
+                        isOpen={isSidebarOpen}
+                        onClose={() => {
+                            setIsSidebarOpen(false);
+                            setClickedNode(null);
+                        }}
+                    />
+                )}
+                
+                {/* MyShortlists component in bottom left */}
+                <MyShortlists />
             </div>
         </div>
     );
