@@ -51,21 +51,24 @@ function DemoHoverCard() {
       
       {/* Simulated graph nodes */}
       <div className="w-64 h-48 relative flex items-center justify-center bg-ctp-surface0 rounded-lg p-4 mb-2">
-        <div className="absolute text-xs text-ctp-subtext1 top-2 left-2">Hover over any node</div>
+        <div className="absolute text-xs text-ctp-subtext1 top-2 left-2">Hover & click nodes for details</div>
         
         {/* Node circles */}
         {[0, 1, 2].map((index) => (
           <div 
             key={index}
-            className={`w-14 h-14 rounded-full flex items-center justify-center m-2 cursor-pointer transition-all duration-300 relative ${
+            className={`w-14 h-14 rounded-full flex flex-col items-center justify-center m-2 cursor-pointer transition-all duration-300 relative ${
               hoveredNode === index 
-                ? 'bg-ctp-sapphire text-ctp-base scale-110 z-10 shadow-lg' 
-                : 'bg-ctp-surface1 text-ctp-text hover:bg-ctp-surface2'
+                ? 'bg-ctp-sapphire text-ctp-base scale-110 z-10 shadow-lg ring-4 ring-ctp-sapphire/40 ring-offset-2 ring-offset-ctp-surface0' 
+                : 'bg-ctp-surface1 text-ctp-text hover:bg-ctp-surface2 hover:ring-2 hover:ring-ctp-sapphire/30'
             }`}
             onMouseEnter={() => handleNodeHover(index)}
             onMouseLeave={() => setHoveredNode(null)}
           >
-            PS{index + 1}
+            <span>PS{index + 1}</span>
+            {hoveredNode === index && (
+              <span className="text-[8px] mt-0.5 animate-pulse font-bold">Click me</span>
+            )}
             
             {/* The hover card - positioned relative to each node */}
             {hoveredNode === index && (
@@ -97,6 +100,15 @@ function DemoHoverCard() {
                       <Badge variant="outline" className="border-ctp-yellow text-ctp-yellow text-xs">
                         {dummyProblemStatements[index].Technology_Bucket}
                       </Badge>
+                    </div>
+                    
+                    <div className="pt-1 flex items-center justify-center">
+                      <button className="py-1 px-3 bg-ctp-sapphire text-ctp-base text-xs rounded-full flex items-center gap-1 hover:bg-ctp-sapphire/90 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"></path>
+                        </svg>
+                        View in sidebar
+                      </button>
                     </div>
                   </CardContent>
                 </Card>
@@ -214,7 +226,7 @@ export default function LandingPage() {
                 </div>
                 
                 {/* Clear CTA section - more compact */}
-                <div className="text-center my-2">
+                <div className="text-center my-2 flex justify-center gap-4">
                     <Link to="/app" 
                         className="inline-flex items-center justify-center rounded-lg px-8 py-3 text-lg font-bold transition-all
                             bg-ctp-sapphire hover:bg-ctp-sapphire/90 text-ctp-base shadow-md hover:shadow-xl hover:-translate-y-1 duration-300">
@@ -223,6 +235,17 @@ export default function LandingPage() {
                             <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
                     </Link>
+                    
+                    <a href="https://github.com/BlacckMangoo/Map-Of-SIH" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-lg font-bold transition-all
+                           bg-ctp-surface0 hover:bg-ctp-surface1 text-ctp-text shadow-md hover:shadow-xl hover:-translate-y-1 duration-300 border border-ctp-overlay0">
+                        Star on GitHub
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"></path>
+                        </svg>
+                    </a>
                 </div>
                 
                 {/* Feature section - interactive components */}

@@ -85,7 +85,10 @@ export function ProblemStatementCard({ data, position, expanded = false }: Probl
     <Card 
       ref={cardRef} 
       style={position ? cardStyle : undefined}
-      className={`w-full max-w-[98vw] ${expanded ? 'md:max-w-2xl lg:max-w-3xl' : 'md:max-w-xl lg:max-w-2xl'} bg-ctp-surface0 border-ctp-overlay0 hover:bg-ctp-surface1 transition-all duration-200 overflow-hidden flex flex-col shadow-lg ${expanded ? 'border-ctp-blue' : ''}`}>
+      className={`w-full max-w-[98vw] ${expanded ? 'md:max-w-2xl lg:max-w-3xl' : 'md:max-w-xl lg:max-w-2xl'} 
+        bg-ctp-surface0 border-ctp-overlay0 hover:bg-ctp-surface1 transition-all duration-200 
+        overflow-hidden flex flex-col shadow-lg 
+        ${expanded ? 'border-ctp-blue' : 'hover:ring-2 hover:ring-ctp-sapphire/40 cursor-pointer'}`}>
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start gap-2">
           <CardTitle className="text-ctp-text text-lg font-semibold leading-tight line-clamp-2">
@@ -104,7 +107,17 @@ export function ProblemStatementCard({ data, position, expanded = false }: Probl
         <div className="text-ctp-text text-sm leading-relaxed">
           <p className={expanded ? "" : "line-clamp-4"}>{data.Description}</p>
           {!expanded && (
-            <p className="text-ctp-blue text-xs mt-1 italic">For more info click the node</p>
+            <div className="flex items-center justify-between mt-2">
+              <div className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-ctp-sapphire mr-1 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"></path>
+                </svg>
+                <p className="text-ctp-sapphire text-sm font-medium">Click for detailed view in sidebar</p>
+              </div>
+              <button className="py-1 px-2 bg-ctp-sapphire text-ctp-base text-xs rounded-full flex items-center hover:bg-ctp-sapphire/90 transition-colors">
+                View Details
+              </button>
+            </div>
           )}
         </div>
         
