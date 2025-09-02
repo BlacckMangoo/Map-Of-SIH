@@ -215,12 +215,7 @@ export default function LandingPage() {
                             <h2 className="text-xl md:text-2xl font-bold text-ctp-text leading-snug mt-4">
                                 Find the perfect problem statement with ease
                             </h2>
-                            
-                            {/* Body: Light gray description text */}
-                            <p className="text-lg text-ctp-subtext0 mt-3">
-                                Still can't find which problem statement to work on? 
-                                It's time to use <span className="font-bold text-ctp-sapphire">SIH MAP!</span>
-                            </p>
+                         
                         </div>
                     </div>
                 </div>

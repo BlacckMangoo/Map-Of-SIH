@@ -72,7 +72,7 @@ function App() {
         return () => window.removeEventListener('resize', handleResize);
     }, [isSidebarOpen]); // Re-run when sidebar opens/closes
     
-    // Handle clicks outside of nodes to clear the clicked node and close sidebar
+
     useEffect(() => {
         function handleBackgroundClick(event: MouseEvent) {
             if (
