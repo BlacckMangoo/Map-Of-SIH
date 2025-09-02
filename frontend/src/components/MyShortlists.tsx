@@ -3,7 +3,12 @@ import { useShortlist } from '@/contexts/useShortlist';
 import { Badge } from '@/components/ui/badge';
 import type { ProblemStatement } from '@/contexts/ShortlistContext';
 
-export function MyShortlists() {
+// Define an interface for communication with parent component
+type SidebarControlProps = {
+  openSidebar?: (statementId: string) => void;
+};
+
+export function MyShortlists({ openSidebar }: SidebarControlProps) {
   const { shortlistedItems, removeFromShortlist } = useShortlist();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -47,22 +52,31 @@ export function MyShortlists() {
             ) : (
               <ul className="divide-y divide-ctp-surface0">
                 {shortlistedItems.map((item: ProblemStatement) => (
-                  <li key={item.Statement_id} className="p-2 hover:bg-ctp-surface0/50">
+                  <li key={item.Statement_id} className="p-2 hover:bg-ctp-surface0/50 transition-colors">
                     <div className="flex justify-between items-start gap-2">
-                      <div>
+                      <div 
+                        className="flex-grow cursor-pointer hover:bg-ctp-surface1/50 p-1 rounded-md transition-colors"
+                        onClick={() => openSidebar && openSidebar(item.Statement_id)}
+                      >
                         <p className="text-sm font-medium text-ctp-text line-clamp-1">{item.Title}</p>
                         <div className="flex items-center gap-1 mt-1">
                           <Badge variant="outline" className="text-xs border-ctp-yellow text-ctp-yellow">
                             {item.Technology_Bucket}
                           </Badge>
-                          <Badge variant="secondary" className="text-xs bg-ctp-blue text-ctp-base">
+                          <Badge variant="secondary" className="text-xs bg-ctp-sapphire text-ctp-base">
                             {item.Statement_id}
                           </Badge>
                         </div>
+                        <p className="text-xs text-ctp-sapphire mt-1 flex items-center gap-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"></path>
+                          </svg>
+                          Click to view in sidebar
+                        </p>
                       </div>
                       <button 
                         onClick={() => removeFromShortlist(item.Statement_id)}
-                        className="text-ctp-red hover:text-ctp-maroon p-1 rounded-full hover:bg-ctp-surface0"
+                        className="text-ctp-red hover:text-ctp-maroon p-1 rounded-full hover:bg-ctp-surface0 self-start"
                         title="Remove from shortlist"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

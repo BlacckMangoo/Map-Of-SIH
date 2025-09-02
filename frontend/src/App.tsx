@@ -15,6 +15,7 @@ import { MyShortlists } from "@/components/MyShortlists"
 
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import React from 'react';
+import { useShortlist } from '@/contexts/useShortlist';
 
 import categoriesData from './data/categories.json'
 import departmentOrgsData from './data/department_orgs.json'
@@ -47,6 +48,28 @@ function App() {
     const [clickedNode, setClickedNode] = useState<GraphNode | null>(null);
     const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { isShortlisted } = useShortlist();
+    
+    // Function to open sidebar with a specific problem statement
+    const openSidebarWithProblem = useCallback((statementId: string) => {
+        const node = problemStatementsData.find(ps => ps.Statement_id === statementId);
+        if (!node) return;
+        
+        const graphNode: GraphNode = {
+            id: node.Statement_id,
+            name: node.Title,
+            category: node.Category,
+            department: node.DepartmentOrg,
+            techBucket: node.Technology_Bucket,
+            description: node.Description,
+            tags: node.Generated_Tags,
+            nodeType: 'problem',
+            val: 8
+        };
+        
+        setClickedNode(graphNode);
+        setIsSidebarOpen(true);
+    }, []);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const graphRef = useRef<any>(null);
@@ -328,30 +351,72 @@ function App() {
                             ctx.fillText(typedNode.name, x, y);
                             
                         } else {
-                            // Circular nodes for problem statements with subtle glow
-                            const nodeSize = Math.sqrt(typedNode.val || 8);
+                            // Check if this node is shortlisted
+                            const isNodeShortlisted = isShortlisted(typedNode.id);
                             
-                            // Subtle glow
-                            ctx.shadowBlur = 10;
-                            ctx.shadowColor = stringToColor(typedNode.category);
+                            // Circular nodes for problem statements with subtle glow
+                            // Increase size for shortlisted items
+                            const nodeSize = isNodeShortlisted 
+                                ? Math.sqrt(typedNode.val || 8) * 1.5 // 50% larger for shortlisted items
+                                : Math.sqrt(typedNode.val || 8);
+                            
+                            // Enhanced glow for shortlisted items
+                            ctx.shadowBlur = isNodeShortlisted ? 20 : 10;
+                            ctx.shadowColor = isNodeShortlisted 
+                                ? '#cba6f7' // mauve - highlight color for shortlisted
+                                : stringToColor(typedNode.category);
                             
                             ctx.beginPath();
                             ctx.arc(x, y, nodeSize, 0, 2 * Math.PI);
                             
                             // Gradient fill with Catppuccin-inspired colors
                             const gradient = ctx.createRadialGradient(x, y, 0, x, y, nodeSize);
-                            const baseColor = stringToColor(typedNode.category);
-                            gradient.addColorStop(0, baseColor);
-                            gradient.addColorStop(0.7, baseColor + 'CC');
-                            gradient.addColorStop(1, baseColor + '88');
+                            
+                            // Special styling for shortlisted nodes
+                            if (isNodeShortlisted) {
+                                // More vibrant gradient for shortlisted items
+                                gradient.addColorStop(0, '#f5c2e7'); // pink
+                                gradient.addColorStop(0.5, '#cba6f7'); // mauve
+                                gradient.addColorStop(1, '#cba6f780'); // mauve with transparency
+                            } else {
+                                // Regular styling for non-shortlisted nodes
+                                const baseColor = stringToColor(typedNode.category);
+                                gradient.addColorStop(0, baseColor);
+                                gradient.addColorStop(0.7, baseColor + 'CC');
+                                gradient.addColorStop(1, baseColor + '88');
+                            }
+                            
                             ctx.fillStyle = gradient;
                             ctx.fill();
                             
-                            ctx.strokeStyle = 'rgba(205, 214, 244, 0.5)'; // ctp-text color with transparency
-                            ctx.lineWidth = 1;
-                            ctx.stroke();
+                            // Add special border for shortlisted items
+                            if (isNodeShortlisted) {
+                                // Double stroke for emphasis
+                                ctx.strokeStyle = 'rgba(203, 166, 247, 0.8)'; // mauve with high opacity
+                                ctx.lineWidth = 2;
+                                ctx.stroke();
+                                
+                                // Outer ring for extra emphasis
+                                ctx.beginPath();
+                                ctx.arc(x, y, nodeSize + 2, 0, 2 * Math.PI);
+                                ctx.strokeStyle = 'rgba(203, 166, 247, 0.4)'; // mauve with less opacity
+                                ctx.lineWidth = 1;
+                                ctx.stroke();
+                            } else {
+                                // Regular stroke for non-shortlisted items
+                                ctx.strokeStyle = 'rgba(205, 214, 244, 0.5)'; // ctp-text color with transparency
+                                ctx.lineWidth = 1;
+                                ctx.stroke();
+                            }
                             
                             ctx.shadowBlur = 0;
+                            
+                            // Add a star or bookmark indicator for shortlisted items
+                            if (isNodeShortlisted) {
+                                ctx.fillStyle = '#f9e2af'; // yellow
+                                ctx.font = `bold ${8 / globalScale}px sans-serif`;
+                                ctx.fillText('★', x, y - nodeSize - 5);
+                            }
                         }
                     }}
                     nodeLabel={() => ''}
@@ -401,7 +466,7 @@ function App() {
                 )}
                 
                 {/* MyShortlists component in bottom left */}
-                <MyShortlists />
+                <MyShortlists openSidebar={openSidebarWithProblem} />
             </div>
         </div>
     );
